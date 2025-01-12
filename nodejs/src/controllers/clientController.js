@@ -57,4 +57,19 @@ const listClients = (req, res) => {
   res.send(sortedData);
 };
 
-module.exports = { createClient, listClients };
+// Listar por edad
+const sortByAge = (req, res) => {
+  const data = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+  const currentDate = new Date();
+
+  const dataWithAge = data.map((client) => {
+    const birthDate = new Date(client.fechaNacimiento);
+    const age = currentDate.getFullYear() - birthDate.getFullYear();
+    return { nombre: client.nombre, edad: age };
+  });
+
+  const sortedByAge = dataWithAge.sort((a, b) => a.edad - b.edad);
+  res.send(sortedByAge);
+};
+
+module.exports = { createClient, listClients, sortByAge };

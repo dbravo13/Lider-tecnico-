@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "nombre": "David Bravo",
+    "documento": "10000156563",
+    "email": "david.bravo@gmail.com",
+    "fechaNacimiento": "1990-05-15"
+  },
+  {
+    "nombre": "Juan Perez",
+    "documento": "12345678",
+    "email": "juan.perez@gmail.com",
+    "fechaNacimiento": "1990-05-15"
+  },
+  {
+    "nombre": "Juan Perez",
+    "documento": "123456781",
+    "email": "juan.perez1@gmail.com",
+    "fechaNacimiento": "2000-02-13"
+  }
+]
