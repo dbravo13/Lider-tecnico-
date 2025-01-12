@@ -44,10 +44,20 @@ public class ClientService {
                 .toList(); 
     }
     
-  
-
     private int calculateAge(LocalDate fechaNacimiento) {
         return Period.between(fechaNacimiento, LocalDate.now()).getYears();
+    }
+
+    public long getClientCount() {
+        return clientRepository.count();
+    }
+
+    public double getAverageAge() {
+        List<Client> clients = clientRepository.findAll();
+        return clients.stream()
+                .mapToInt(client -> calculateAge(client.getFechaNacimiento()))
+                .average()
+                .orElse(0.0);
     }
 
 

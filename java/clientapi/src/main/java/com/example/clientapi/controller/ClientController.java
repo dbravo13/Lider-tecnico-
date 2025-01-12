@@ -33,5 +33,10 @@ public class ClientController {
         return ResponseEntity.ok(clientService.getAllClientsSortedByAge());
     }
 
-
+    @GetMapping("/promedio-edad")
+    public ResponseEntity<?> getClientStats() {
+        long totalClients = clientService.getClientCount();
+        double averageAge = clientService.getAverageAge();
+        return ResponseEntity.ok("Total clientes: " + totalClients + ", Promedio edad: " + averageAge);
+    }
 }
