@@ -72,4 +72,20 @@ const sortByAge = (req, res) => {
   res.send(sortedByAge);
 };
 
-module.exports = { createClient, listClients, sortByAge };
+// Promedio de edad
+const averageAge = (req, res) => {
+  const data = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+  const currentDate = new Date();
+
+  const ages = data.map((client) => {
+    const birthDate = new Date(client.fechaNacimiento);
+    return currentDate.getFullYear() - birthDate.getFullYear();
+  });
+
+  const totalAge = ages.reduce((acc, age) => acc + age, 0);
+  const average = ages.length > 0 ? totalAge / ages.length : 0;
+
+  res.send({ cantidad: ages.length, promedioEdad: average });
+};
+
+module.exports = { createClient, listClients, sortByAge, averageAge };
