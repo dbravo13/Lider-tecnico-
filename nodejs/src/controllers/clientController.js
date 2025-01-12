@@ -50,4 +50,11 @@ const createClient = (req, res) => {
   }
 };
 
-module.exports = { createClient };
+// Listar clientes
+const listClients = (req, res) => {
+  const data = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+  const sortedData = data.sort((a, b) => a.nombre.localeCompare(b.nombre));
+  res.send(sortedData);
+};
+
+module.exports = { createClient, listClients };
