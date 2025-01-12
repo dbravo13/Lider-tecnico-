@@ -3,10 +3,11 @@ package com.example.clientapi.service;
 import com.example.clientapi.model.Client;
 import com.example.clientapi.repository.ClientRepository;
 import com.example.exception.DuplicateResourceException;
-
 import org.springframework.stereotype.Service;
-import java.util.List;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
 
 @Service
 public class ClientService {
@@ -32,5 +33,22 @@ public class ClientService {
                 .sorted((c1, c2) -> c1.getNombre().compareToIgnoreCase(c2.getNombre()))
                 .toList();
     }
+
+    public List<Client> getAllClientsSortedByAge() {
+        return clientRepository.findAll().stream()
+                .map(client -> {
+                    client.setEdad(calculateAge(client.getFechaNacimiento())); 
+                    return client; 
+                })
+                .sorted((c1, c2) -> c1.getEdad().compareTo(c2.getEdad())) 
+                .toList(); 
+    }
+    
+  
+
+    private int calculateAge(LocalDate fechaNacimiento) {
+        return Period.between(fechaNacimiento, LocalDate.now()).getYears();
+    }
+
 
 }

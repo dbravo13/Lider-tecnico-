@@ -28,4 +28,10 @@ public class ClientController {
         return ResponseEntity.ok(clientService.getAllClientsSortedByName());
     }
 
+    @GetMapping("/orden-edad")
+    public ResponseEntity<List<Client>> getClientsSortedByAge() {
+        return ResponseEntity.ok(clientService.getAllClientsSortedByAge());
+    }
+
+
 }
